@@ -1,0 +1,42 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    double m, L, h, T_min, T_max, dT;
+    double g = 9.81;
+
+    cout << "Введите массу m: "; cin >> m;
+    cout << "Введите L: "; cin >> L;
+    cout << "Введите высоту h: "; cin >> h;
+    cout << "Введите T_min: "; cin >> T_min;
+    cout << "Введите T_max: "; cin >> T_max;
+    cout << "Введите шаг dT: "; cin >> dT;
+
+    double min_time = 999999;
+    double best_T = 0;
+
+    // Перебираем тягу от T_min до T_max
+    for (double T = T_min; T <= T_max; T = T + dT) {
+        // Считаем ускорение (предположим, тяга помогает подъему)
+        double ay = (L + T - m * g) / m;
+
+        if (ay > 0) {
+            double t = sqrt(2 * h / ay);
+            
+            if (t < min_time) {
+                min_time = t;
+                best_T = T;
+            }
+        }
+    }
+
+    if (best_T != 0) {
+        cout << "Лучшая тяга: " << best_T << endl;
+        cout << "Минимальное время: " << min_time << endl;
+    } else {
+        cout << "Нет подходящей тяги." << endl;
+    }
+
+    return 0;
+}
