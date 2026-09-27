@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    double V[5] = {50, 75, 100, 125, 150};
+    double rho[5] = {1.225, 1.112, 1.006, 0.909, 0.819};
+    
+    double S = 20.0;
+    double Cl = 0.5;
+
+    cout << "Шаг | Скорость | Плотность | Подъемная сила" << endl;
+
+    for (int i = 0; i < 5; i++) {
+        double L = 0.5 * rho[i] * V[i] * V[i] * S * Cl;
+        cout << i + 1 << "\t| " << V[i] << "\t | " << rho[i] << "\t  | " << L << endl;
+    }
+
+    return 0;
+}
