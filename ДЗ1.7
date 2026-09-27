@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    double T, L, D, m;
+    double g = 9.81;
+
+    cout << "Введите T, L, D, m через пробел: ";
+    cin >> T >> L >> D >> m;
+
+    double ay = (L - m * g) / m;
+
+    cout << "Вертикальное ускорение: " << ay << endl;
+    cout << "Режим: ";
+
+    if (ay > 0.5) {
+        cout << "Набор высоты" << endl;
+    } else if (ay >= 0 && ay <= 0.5) {
+        cout << "Горизонтальный полет" << endl;
+    } else {
+        cout << "Снижение" << endl;
+    }
+
+    return 0;
+}
