@@ -1,0 +1,34 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    double g = 9.81;
+    double rho = 1.225;
+    double V = 100;
+    double h = 1000;
+
+    double mass[3] = {1500, 2000, 1200};
+    double S[3] = {16, 20, 12};
+    double T[3] = {5000, 8000, 4000};
+    double Cd[3] = {0.03, 0.04, 0.02};
+    double Cl[3] = {0.5, 0.6, 0.4};
+
+    for (int i = 0; i < 3; i++) {
+        double L = 0.5 * rho * V * V * S[i] * Cl[i];
+        double D = 0.5 * rho * V * V * S[i] * Cd[i];
+        double ay = (L - mass[i] * g) / mass[i];
+        
+        cout << "Самолет " << i + 1 << ":" << endl;
+        cout << "  L = " << L << ", D = " << D << ", ay = " << ay << endl;
+
+        if (ay > 0) {
+            double t = sqrt(2 * h / ay);
+            cout << "  Время набора высоты: " << t << endl;
+        } else {
+            cout << "  Не может набрать высоту." << endl;
+        }
+    }
+
+    return 0;
+}
