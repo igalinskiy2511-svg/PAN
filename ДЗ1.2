@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+
+double raschet(double rho, double V, double S, double Cd) {
+    return 0.5 * rho * V * V * S * Cd;
+}
+
+int main() {
+    double rho, V, S, Cd, D;
+
+    cout << "Введите плотность (rho): "; cin >> rho;
+    cout << "Введите скорость (V): "; cin >> V;
+    cout << "Введите площадь (S): "; cin >> S;
+    cout << "Введите Cd: "; cin >> Cd;
+
+    D = raschet(rho, V, S, Cd);
+
+    cout << "Сопротивление D = " << D << endl;
+
+    return 0;
+}
