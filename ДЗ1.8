@@ -1,0 +1,52 @@
+#include <iostream>
+#include <cmath>
+#include <algorithm>
+using namespace std;
+
+struct Samolet {
+    string name;
+    double mass;
+    double T;
+    double Cd;
+    double Cl;
+    double S;
+    double time;
+};
+
+bool sravnenie(Samolet a, Samolet b) {
+    return a.time < b.time;
+}
+
+int main() {
+    double g = 9.81, rho = 1.225, V = 100, h = 2000;
+
+    Samolet planes[3] = {
+        {"Первый", 1000, 3000, 0.03, 0.4, 12, 0},
+        {"Второй", 1500, 5000, 0.04, 0.5, 15, 0},
+        {"Третий", 800, 2000, 0.02, 0.3, 10, 0}
+    };
+
+    for (int i = 0; i < 3; i++) {
+        double L = 0.5 * rho * V * V * planes[i].S * planes[i].Cl;
+        double ay = (L - planes[i].mass * g) / planes[i].mass;
+        
+        if (ay > 0) {
+            planes[i].time = sqrt(2 * h / ay);
+        } else {
+            planes[i].time = 999999; // если не летит
+        }
+    }
+
+    sort(planes, planes + 3, sravnenie);
+
+    cout << "Результаты (отсортировано по времени):" << endl;
+    for (int i = 0; i < 3; i++) {
+        if (planes[i].time != 999999) {
+            cout << planes[i].name << ": " << planes[i].time << " сек" << endl;
+        } else {
+            cout << planes[i].name << ": не набирает высоту" << endl;
+        }
+    }
+
+    return 0;
+}
