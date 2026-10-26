@@ -1,0 +1,49 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <iomanip>
+
+int main() {
+    double g = 9.8, dt = 1.0;
+    
+    double v0_1 = 50.0;
+    std::vector<double> times1, heights1;
+    for (double t = 0.0; ; t += dt) {
+        double h = v0_1 * t - 0.5 * g * t * t;
+        times1.push_back(t); heights1.push_back(h);
+        if (h <= 0 && t > 0) break;
+    }
+
+    double v0_2 = 45.0;
+    std::vector<double> times2, heights2;
+    for (double t = 0.0; ; t += dt) {
+        double h = v0_2 * t - 0.5 * g * t * t;
+        times2.push_back(t); heights2.push_back(h);
+        if (h <= 0 && t > 0) break;
+    }
+
+    double max1 = *std::max_element(heights1.begin(), heights1.end());
+    double max2 = *std::max_element(heights2.begin(), heights2.end());
+
+    double t_fall1 = times1.back();
+    double t_fall2 = times2.back();
+
+    if (max1 > max2) {
+        std::cout << "Первая ракета поднялась выше\n";
+    } else {
+        std::cout << "Вторая ракета поднялась выше\n";
+    }
+
+    if (t_fall1 > t_fall2) {
+        std::cout << "Первая ракета была в воздухе дольше\n";
+    } else {
+        std::cout << "Вторая ракета была в воздухе дольше\n";
+    }
+
+    std::cout << "\n";
+    std::cout << std::setw(15) << "max_height" << std::setw(15) << "time_of_fall\n";
+    std::cout << std::setw(15) << max1 << std::setw(15) << t_fall1 << "\n";
+    std::cout << std::setw(15) << max2 << std::setw(15) << t_fall2 << "\n";
+
+    return 0;
+}
