@@ -1,0 +1,29 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    double v0 = 50.0, g = 9.8, dt = 1.0;
+    std::vector<double> times;
+    std::vector<double> heights;
+
+    for (double t = 0.0; t <= 1000.0; t += dt) {
+        double h = v0 * t - 0.5 * g * t * t;
+        if (h < 0) break;
+        times.push_back(t);
+        heights.push_back(h);
+    }
+
+    if (heights.empty()) {
+        std::cout << "Данных нет\n";
+        return 0;
+    }
+
+    auto it = std::max_element(heights.begin(), heights.end());
+    size_t idx_max = std::distance(heights.begin(), it);
+
+    std::cout << "Максимальная высота: " << heights[idx_max] << "\n";
+    std::cout << "Время: " << times[idx_max] << "\n";
+
+    return 0;
+}
